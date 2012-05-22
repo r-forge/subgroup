@@ -1,0 +1,18 @@
+Package: subgroup
+Type: Package
+Title: Subgroup Discovery and Analysis
+Version: 0.2
+Date: 2012-04-14
+Author: Martin Atzmueller
+Maintainer: Martin Atzmueller <martin@atzmueller.net>
+Description: A collection of efficient and effective tools and
+	algorithms for subgroup discovery and analysis. The package
+	integrates an R interface to the org.vikamine.kernel library
+	of the VIKAMINE system (http://www.vikamine.org) implementing
+	subgroup discovery and pattern mining algorithms in Java.
+Classification/ACM: G.4, H.2.8, I.5.1
+License: GPL (>= 3)
+Depends: R (>= 2.6.0), methods, rJava (>= 0.6-3), foreign (>= 0.8-40)
+SystemRequirements: Java (>= 5.0)
+LazyLoad: yes
+URL: http://www.subgroup.cc
