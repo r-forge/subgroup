@@ -21,7 +21,7 @@
 ###############################################################################
 
 library(foreign)
-library(rJava)
+library(rJava, verbose=TRUE)
 
 setGeneric("CreateARFFProvider",
     function(source, name, ...) {
