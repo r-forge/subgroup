@@ -1,4 +1,4 @@
-require(rJava, verbose=TRUE)
+require(rJava)
 
 .First.lib <- function(libname, pkgname) {
 	   .jpackage(pkgname)
