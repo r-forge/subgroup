@@ -26,7 +26,9 @@ parameters for subgroup discovery.}
 # subgroup discovery on a data.frame, for binary target
 data(credit.data)
 result1 <- DiscoverSubgroups(credit.data, as.target("class", "good"))
-result2 <- DiscoverSubgroups(credit.data, as.target("class", "good"), new("SDTaskConfig", attributes=c("checking_status", "employment")))
+result2 <- DiscoverSubgroups(
+    credit.data, as.target("class", "good"), new("SDTaskConfig",
+    attributes=c("checking_status", "employment")))
 
 ToDataFrame(result1)
 ToDataFrame(result2)
