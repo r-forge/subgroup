@@ -13,8 +13,8 @@ The subgroup package contains a set of efficient and effective
 \tabular{ll}{
 Package: \tab subgroup\cr
 Type: \tab Package\cr
-Version: \tab 0.2\cr
-Date: \tab 2012-04-14\cr
+Version: \tab 0.3\cr
+Date: \tab 2014-07-14\cr
 License: \tab GPL (>= 3)\cr
 LazyLoad: \tab yes\cr
 }
