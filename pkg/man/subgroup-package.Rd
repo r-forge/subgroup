@@ -2,19 +2,19 @@
 \alias{subgroup}
 \docType{package}
 \title{
-Subgroup Package
- - Algorithms and Tools for Efficient Subgroup Discovery
+subgroup Package
+ - Algorithms and Tools for Efficient Subgroup Discovery and Analytics
 }
 \description{
 The subgroup package contains a set of efficient and effective
- tools and algorithms for subgroup discovery.
+ tools and algorithms for subgroup discovery and analytics.
 }
 \details{
 \tabular{ll}{
 Package: \tab subgroup\cr
 Type: \tab Package\cr
-Version: \tab 0.3\cr
-Date: \tab 2014-07-14\cr
+Version: \tab 0.4\cr
+Date: \tab 2014-08-01\cr
 License: \tab GPL (>= 3)\cr
 LazyLoad: \tab yes\cr
 }

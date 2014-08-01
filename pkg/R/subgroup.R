@@ -1,8 +1,8 @@
 ###############################################################################
-#    Subgroup package R core support code
+#    subgroup package R classes
 # 
 #    This file is part of the R subgroup package.
-#    Copyright (C) 2011-2012  by Martin Atzmueller
+#    Copyright (C) 2011-2014 by Martin Atzmueller
 #    
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -31,13 +31,14 @@ setGeneric("CreateARFFProvider",
 
 setMethod("CreateARFFProvider", signature(source = "data.frame", name = "character"),
     function(source, name, ...) {
-    # Creates a dataset provider (converting the dataframe)
+      # Creates a dataset provider (converting the dataframe)
       con <- textConnection("arffVector", "w")
       write.arff(source, con)
       flush(con)
       close(con)
+      rm(con)
       arff <- paste(arffVector, "", collapse="\n")
-      provider <- .jnew("org/vikamine/kernel/xpdl/ARFFAsStringDatasetProvider", arff, name)     
+      provider <- .jnew("org/vikamine/kernel/xpdl/ARFFAsStringDatasetProvider", arff, name)
       return(provider)
     }
 )
@@ -52,12 +53,13 @@ setMethod("CreateARFFProvider", signature(source = "character", name = "characte
 
 CreateOntologyForData <- function(provider, dataset) {
   # Creates the ontology object for the respective dataset
-  ontology <- J(provider, "getDataset", dataset)
+  ontology <- .jcall(provider, "Lorg/vikamine/kernel/data/Ontology;","getDataset", dataset)
   return(ontology)
 }
 
 CreateSimpleSDTask <- function(ontology, target) {
   # Creates a simple subgroup discovery task
+  freeMemory()
   simpleTask <- new(J("org/vikamine/kernel/subgroup/search/SDSimpleTask"), ontology)
   if (!is.null(target$value)) {
     selector <- new(J("org/vikamine/kernel/subgroup/selectors/DefaultSGSelector"), ontology, target$attribute, target$value)
@@ -80,6 +82,7 @@ CreateSDTask <- function(source, target, config = new("SDTaskConfig")) {
   #
   # Returns:
   #   A subgroup discovery task
+  freeMemory()
   provider <- CreateARFFProvider(source, "data")
   ontology <- CreateOntologyForData(provider, "data")
   task <- CreateSimpleSDTask(ontology, target)
@@ -148,14 +151,14 @@ ConvertDescription <- function(sgDescription) {
   return(as.character(sgSelectorArray))
 }
 
-DiscoverSubgroupsByTask <- function(task) {
+DiscoverSubgroupsByTask <- function(task, convert.df=FALSE) {
   # Internal function for setting up and performing subgroup discovery
   # Args:
   #   task: A subgroup discovery task
   #
   # Returns:
   #   A list of subgroup patterns
-  sgSet <- J(task, "performSubgroupDiscovery")
+  sgSet <- J(task, "performsubgroup")
   sgList <- J(sgSet, "toSortedList", FALSE)
   sgArray <- .jevalArray(J(sgList, "toArray"))
   
@@ -171,10 +174,15 @@ DiscoverSubgroupsByTask <- function(task) {
     patterns = append(patterns, pattern)
   }
   
-  return(patterns)
+  if (convert.df) {
+    dataFrameRules <- ToDataFrame(patterns)
+    return(dataFrameRules)
+  } else {
+    return(patterns)
+  }
 }
 
-DiscoverSubgroups <- function(source, target, config=new("SDTaskConfig")) {
+DiscoverSubgroups <- function(source, target, config=new("SDTaskConfig", convert.df=FALSE)) {
   # Performs subgroup discovery according to target and config on data
   #
   # Args:
@@ -185,7 +193,7 @@ DiscoverSubgroups <- function(source, target, config=new("SDTaskConfig")) {
   # Returns:
   #   A list of subgroup patterns
   task <- CreateSDTask(source, target, config)
-  result <- DiscoverSubgroupsByTask(task)
+  result <- DiscoverSubgroupsByTask(task, convert.df)
   return(result)
 }
 
@@ -247,4 +255,12 @@ ToDataFrame <- function(patterns, ndigits=2) {
         description=as.vector(descriptions, "character"))
   }
   return(dataframe)
+}
+
+freeMemory <- function(...) {
+  # Call the R garbage collection
+  # Then call Java garbage collection
+  gc(...)
+  .jcall("java/lang/System", method = "gc")
+  invisible()
 }

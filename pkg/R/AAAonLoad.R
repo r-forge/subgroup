@@ -1,8 +1,8 @@
 ###############################################################################
-#    Subgroup package R classes
+#    subgroup package R classes
 # 
 #    This file is part of the R subgroup package.
-#    Copyright (C) 2011-2012  by Martin Atzmueller
+#    Copyright (C) 2011-2014 by Martin Atzmueller
 #    
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
