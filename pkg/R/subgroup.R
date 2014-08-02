@@ -23,13 +23,13 @@
 library(foreign)
 library(rJava)
 
-setGeneric("CreateARFFProvider",
+setGeneric(".CreateARFFProvider",
     function(source, name, ...) {
-      standardGeneric("CreateARFFProvider")
+      standardGeneric(".CreateARFFProvider")
     }
 )
 
-setMethod("CreateARFFProvider", signature(source = "data.frame", name = "character"),
+setMethod(".CreateARFFProvider", signature(source = "data.frame", name = "character"),
     function(source, name, ...) {
       # Creates a dataset provider (converting the dataframe)
       con <- textConnection("arffVector", "w")
@@ -43,7 +43,7 @@ setMethod("CreateARFFProvider", signature(source = "data.frame", name = "charact
     }
 )
 
-setMethod("CreateARFFProvider", signature(source = "character", name = "character"),
+setMethod(".CreateARFFProvider", signature(source = "character", name = "character"),
     function(source, name, ...) {
       # Creates a dataset provider given a file name
       provider <- .jnew("org/vikamine/kernel/xpdl/FileDatasetProvider", source)
@@ -51,15 +51,15 @@ setMethod("CreateARFFProvider", signature(source = "character", name = "characte
     }
 )
 
-CreateOntologyForData <- function(provider, dataset) {
+.CreateOntologyForData <- function(provider, dataset) {
   # Creates the ontology object for the respective dataset
   ontology <- .jcall(provider, "Lorg/vikamine/kernel/data/Ontology;","getDataset", dataset)
   return(ontology)
 }
 
-CreateSimpleSDTask <- function(ontology, target) {
+.CreateSimpleSDTask <- function(ontology, target) {
   # Creates a simple subgroup discovery task
-  freeMemory()
+  .FreeMemory()
   simpleTask <- new(J("org/vikamine/kernel/subgroup/search/SDSimpleTask"), ontology)
   if (!is.null(target$value)) {
     selector <- new(J("org/vikamine/kernel/subgroup/selectors/DefaultSGSelector"), ontology, target$attribute, target$value)
@@ -82,10 +82,10 @@ CreateSDTask <- function(source, target, config = new("SDTaskConfig")) {
   #
   # Returns:
   #   A subgroup discovery task
-  freeMemory()
-  provider <- CreateARFFProvider(source, "data")
-  ontology <- CreateOntologyForData(provider, "data")
-  task <- CreateSimpleSDTask(ontology, target)
+  .FreeMemory()
+  provider <- .CreateARFFProvider(source, "data")
+  ontology <- .CreateOntologyForData(provider, "data")
+  task <- .CreateSimpleSDTask(ontology, target)
   J(task, "setQualityFunction", config@qf)
   J(task, "setSDMethod", config@method)
   J(task, "setMaxSGCount", as.integer(config@k))
@@ -120,7 +120,7 @@ as.target <- function(attribute=NULL, value=NULL) {
     return(NULL)
 }
 
-GetParameters <- function(task, sg) {
+.GetParameters <- function(task, sg) {
   target <- J(task, "getTarget")
   if (J(target, "isBoolean")) {
     size <- J(J(sg, "getStatistics"), "getSubgroupSize")
@@ -137,7 +137,7 @@ GetParameters <- function(task, sg) {
   }
 }
 
-ConvertDescription <- function(sgDescription) {
+.ConvertDescription <- function(sgDescription) {
   # Internal function for converting a (Java) SGDescription consisting
   # of a set of selection expressions into a character vector of strings
   # representing these
@@ -166,10 +166,10 @@ DiscoverSubgroupsByTask <- function(task, convert.df=FALSE) {
   for (sg in sgArray) {
     #description <- as.character(J(J(sg, "getSGDescription"), "getDescription"))
     sgDescription <- J(sg, "getSGDescription")
-    description <- ConvertDescription(sgDescription)
+    description <- .ConvertDescription(sgDescription)
     quality <- J(sg, "getQuality")
     size <- J(J(sg, "getStatistics"), "getSubgroupSize")
-    parameters = GetParameters(task, sg)    
+    parameters = .GetParameters(task, sg)    
     pattern <- new("Pattern", description=description, quality=quality, size=size, parameters=parameters)
     patterns = append(patterns, pattern)
   }
@@ -198,7 +198,7 @@ DiscoverSubgroups <- function(source, target, config=new("SDTaskConfig"), conver
 }
 
 
-FormatDoubleSignificantDigits <- function(double, ndigits=2) {
+.FormatDoubleSignificantDigits <- function(double, ndigits=2) {
   # Internal function: Prints double according to
   if (is.numeric(ndigits)) {
     sprintf(paste("%.", ndigits, "f", sep=""), double)
@@ -230,13 +230,13 @@ ToDataFrame <- function(patterns, ndigits=2) {
   i = 1
   for (pattern in patterns) {
     descriptions[i] = paste(pattern@description, collapse=", ")
-    qualities[i] = FormatDoubleSignificantDigits(pattern@quality, ndigits)
+    qualities[i] = .FormatDoubleSignificantDigits(pattern@quality, ndigits)
     sizes[i] = pattern@size
     if (!is.null(pattern@parameters$mean)) {
-      ps[i] = FormatDoubleSignificantDigits(pattern@parameters$mean, ndigits)
+      ps[i] = .FormatDoubleSignificantDigits(pattern@parameters$mean, ndigits)
       isNumeric = TRUE
     } else {
-      ps[i] = FormatDoubleSignificantDigits(pattern@parameters$p, ndigits)
+      ps[i] = .FormatDoubleSignificantDigits(pattern@parameters$p, ndigits)
       isNumeric = FALSE
     }
     i = i + 1
@@ -257,7 +257,7 @@ ToDataFrame <- function(patterns, ndigits=2) {
   return(dataframe)
 }
 
-freeMemory <- function(...) {
+.FreeMemory <- function(...) {
   # Call the R garbage collection
   # Then call Java garbage collection
   gc(...)

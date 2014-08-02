@@ -20,14 +20,6 @@
 #    Contact: Martin Atzmueller (martin@atzmueller.net)
 ###############################################################################
 
-setClass("SDOptions",
-    representation(
-        verbose = "logical",
-        debug = "logical"
-    ),
-    prototype(verbose = FALSE, debug = FALSE)
-)
-
 
 setClass("SDTaskConfig",
     representation(
