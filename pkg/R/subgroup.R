@@ -158,7 +158,7 @@ DiscoverSubgroupsByTask <- function(task, convert.df=FALSE) {
   #
   # Returns:
   #   A list of subgroup patterns
-  sgSet <- J(task, "performsubgroup")
+  sgSet <- J(task, "performSubgroupDiscovery")
   sgList <- J(sgSet, "toSortedList", FALSE)
   sgArray <- .jevalArray(J(sgList, "toArray"))
   
