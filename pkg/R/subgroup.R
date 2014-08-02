@@ -182,7 +182,7 @@ DiscoverSubgroupsByTask <- function(task, convert.df=FALSE) {
   }
 }
 
-DiscoverSubgroups <- function(source, target, config=new("SDTaskConfig", convert.df=FALSE)) {
+DiscoverSubgroups <- function(source, target, config=new("SDTaskConfig"), convert.df=FALSE) {
   # Performs subgroup discovery according to target and config on data
   #
   # Args:
