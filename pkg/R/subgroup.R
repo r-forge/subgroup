@@ -151,7 +151,7 @@ as.target <- function(attribute=NULL, value=NULL) {
   return(as.character(sgSelectorArray))
 }
 
-DiscoverSubgroupsByTask <- function(task, convert.df=FALSE) {
+DiscoverSubgroupsByTask <- function(task, as.df=FALSE) {
   # Internal function for setting up and performing subgroup discovery
   # Args:
   #   task: A subgroup discovery task
@@ -174,7 +174,7 @@ DiscoverSubgroupsByTask <- function(task, convert.df=FALSE) {
     patterns = append(patterns, pattern)
   }
   
-  if (convert.df) {
+  if (as.df) {
     dataFrameRules <- ToDataFrame(patterns)
     return(dataFrameRules)
   } else {
@@ -182,7 +182,7 @@ DiscoverSubgroupsByTask <- function(task, convert.df=FALSE) {
   }
 }
 
-DiscoverSubgroups <- function(source, target, config=new("SDTaskConfig"), convert.df=FALSE) {
+DiscoverSubgroups <- function(source, target, config=new("SDTaskConfig"), as.df=FALSE) {
   # Performs subgroup discovery according to target and config on data
   #
   # Args:
@@ -193,7 +193,7 @@ DiscoverSubgroups <- function(source, target, config=new("SDTaskConfig"), conver
   # Returns:
   #   A list of subgroup patterns
   task <- CreateSDTask(source, target, config)
-  result <- DiscoverSubgroupsByTask(task, convert.df)
+  result <- DiscoverSubgroupsByTask(task, as.df)
   return(result)
 }
 

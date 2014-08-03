@@ -6,7 +6,7 @@ Performs subgroup discovery according to the given target and
 the configuration on the data.
 }
 \usage{
-DiscoverSubgroups(source, target, config=new("SDTaskConfig"), convert.df=FALSE)
+DiscoverSubgroups(source, target, config=new("SDTaskConfig"), as.df=FALSE)
 }
 \arguments{
 \item{source}{a data.frame or the a character string giving
@@ -15,8 +15,8 @@ the filename of an ARFF file to use.}
 to consider for subgroup discovery.}
 \item{config}{an instance of SDTaskConfig providing various
 parameters for subgroup discovery.}
-\item{convert.df}{TRUE, if the result patterns should be converted
-to a data.frame using \code{\link{ToDataFrame}}}
+\item{as.df}{TRUE, if the result patterns should be returned as
+a data.frame using \code{\link{ToDataFrame}}}
 }
 \seealso{
 \code{\link{DiscoverSubgroupsByTask}}.
