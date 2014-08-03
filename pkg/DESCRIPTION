@@ -1,4 +1,4 @@
-Package: subgroup
+Package: subgroup.discovery
 Type: Package
 Title: Subgroup Discovery
 Version: 0.4
