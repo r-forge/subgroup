@@ -1,8 +1,8 @@
-\name{subgroup.discovery}
-\alias{subgroup.discovery}
+\name{subgroup}
+\alias{subgroup}
 \docType{package}
 \title{
-subgroup.discovery Package
+subgroup Package
  - Algorithms and Tools for Efficient Subgroup Discovery
 }
 \description{
@@ -11,7 +11,7 @@ The subgroup discovery package contains a set of efficient and effective
 }
 \details{
 \tabular{ll}{
-Package: \tab subgroup.discovery\cr
+Package: \tab subgroup\cr
 Type: \tab Package\cr
 Version: \tab 0.4\cr
 Date: \tab 2014-08-01\cr

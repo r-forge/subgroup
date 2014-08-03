@@ -1,7 +1,7 @@
 ###############################################################################
-#    subgroup.discovery package R classes
+#    subgroup package R classes
 # 
-#    This file is part of the R subgroup.discovery package.
+#    This file is part of the R subgroup package.
 #    Copyright (C) 2011-2014 by Martin Atzmueller
 #    
 #    This program is free software: you can redistribute it and/or modify
@@ -20,7 +20,7 @@
 #    Contact: Martin Atzmueller (martin@atzmueller.net)
 ###############################################################################
 
-library(subgroup.discovery)
+library(subgroup)
 
 data(credit.data)
 
