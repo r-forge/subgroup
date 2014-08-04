@@ -32,13 +32,17 @@ setGeneric(".CreateARFFProvider",
 setMethod(".CreateARFFProvider", signature(source = "data.frame", name = "character"),
     function(source, name, ...) {
       # Creates a dataset provider (converting the dataframe)
-      con <- textConnection("arffVector", "w")
+      arff.vector <- NULL # This prevents the R CHECK NOTE:
+      # 'No visible bindingfor global variable Note in R CMD check'
+      
+      con <- textConnection("arff.vector", open = "w", local = TRUE)
       write.arff(source, con)
       flush(con)
       close(con)
       rm(con)
-      arff <- paste(arffVector, "", collapse="\n")
+      arff <- paste(arff.vector, "", collapse="\n")
       provider <- .jnew("org/vikamine/kernel/xpdl/ARFFAsStringDatasetProvider", arff, name)
+      rm(arff.vector)
       return(provider)
     }
 )
@@ -151,7 +155,7 @@ as.target <- function(attribute=NULL, value=NULL) {
   return(as.character(sgSelectorArray))
 }
 
-DiscoverSubgroupsByTask <- function(task, as.df=FALSE) {
+DiscoverSubgroupsByTask <- function(task, as.df = FALSE) {
   # Internal function for setting up and performing subgroup discovery
   # Args:
   #   task: A subgroup discovery task
