@@ -3,18 +3,18 @@
 \docType{package}
 \title{
 rsubgroup Package
- - Algorithms and Tools for Efficient Subgroup Discovery
+ - Algorithms and Tools for Efficient Subgroup Discovery and Analytics
 }
 \description{
 The rsubgroup package contains a set of efficient and effective
- tools and algorithms for subgroup discovery.
+ tools and algorithms for subgroup discovery and analytics.
 }
 \details{
 \tabular{ll}{
 Package: \tab rsubgroup\cr
 Type: \tab Package\cr
-Version: \tab 0.4\cr
-Date: \tab 2014-08-01\cr
+Version: \tab 0.5\cr
+Date: \tab 2014-08-04\cr
 License: \tab GPL (>= 3)\cr
 LazyLoad: \tab yes\cr
 }
