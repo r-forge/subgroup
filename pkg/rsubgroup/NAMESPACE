@@ -1,1 +1,5 @@
 exportPattern("^[^\\.]")
+
+import(methods)
+import(rJava)
+importFrom(foreign, write.arff)
