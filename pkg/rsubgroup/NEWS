@@ -3,7 +3,7 @@ rsubgroup NEWS
 For a detailed list of changes, see the svn commit history at
 svn://r-forge.r-project.org/svnroot/subgroup/
 
-Changes in version 0.6 (2014-09-09)
+Changes in version 0.6 (2014-09-10)
 ===================================
 * Improvements:
   * optimizations in the beam search algorithm

@@ -14,7 +14,7 @@ The rsubgroup package contains a set of efficient and effective
 Package: \tab rsubgroup\cr
 Type: \tab Package\cr
 Version: \tab 0.6\cr
-Date: \tab 2014-09-09\cr
+Date: \tab 2014-09-10\cr
 License: \tab GPL (>= 3)\cr
 LazyLoad: \tab yes\cr
 }
@@ -32,4 +32,3 @@ Maintainer: Martin Atzmueller <martin@atzmueller.net>
   }
 }
 \keyword{ package }
-
