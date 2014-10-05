@@ -28,6 +28,8 @@
   return(.jarray(attributeIDs))
 }
 
+setClassUnion("vectorOrNull",members=c("vector", "NULL"))
+
 setClass("SDTaskConfig",
     representation(
         qf          = "character",
@@ -39,7 +41,7 @@ setClass("SDTaskConfig",
         nodefaults  = "logical",
         relfilter   = "logical",
         postfilter  = "character",
-        attributes  = "vector"
+        attributes  = "vectorOrNull"
     ),
     prototype(qf="ps", method="sdmap", k = as.integer(20), minqual = as.integer(0), minsize = as.integer(0),
         maxlen = as.integer(7), nodefaults = FALSE, relfilter = FALSE, postfilter = "", attributes = NULL)
