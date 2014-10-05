@@ -47,6 +47,9 @@ setClass("SDTaskConfig",
         maxlen = as.integer(7), nodefaults = FALSE, relfilter = FALSE, postfilter = "", attributes = NULL)
 )
 
+SDTaskConfig <- function(...){
+  new("SDTaskConfig", ...)
+}
 
 setClass("Pattern",
     representation(

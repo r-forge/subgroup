@@ -10,7 +10,7 @@
 
 \section{Objects from the Class}{
   Objects are created by calls of the form
-  \code{new("SDTaskConfig", ...)}.
+  \code{SDTaskConfig(...)}.
 }
 
 \section{Slots}{
