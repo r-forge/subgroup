@@ -1,7 +1,6 @@
 \name{SDTaskConfig-class}
 \docType{class}
 \alias{SDTaskConfig-class}
-\alias{SDTaskConfig}
 
 \title{Class ``SDTaskConfig'' --- A Set of Configuration
 	Settings}	

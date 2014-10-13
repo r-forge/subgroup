@@ -76,13 +76,13 @@ setMethod(".CreateARFFProvider", signature(source = "character", name = "charact
   return(simpleTask)
 }
 
-CreateSDTask <- function(source, target, config = new("SDTaskConfig")) {
+CreateSDTask <- function(source, target, config = SDTaskConfig()) {
   # Creates a subgroup discovery task
   #
   # Args:
   #   source: A data source, i.e., dataframe or file (name)
   #   target: The target variable
-  #   config: A SDTaskConfig
+  #   config: A SDTaskConfig task configuration
   #
   # Returns:
   #   A subgroup discovery task
@@ -191,7 +191,7 @@ DiscoverSubgroupsByTask <- function(task, as.df = FALSE) {
   }
 }
 
-DiscoverSubgroups <- function(source, target, config=new("SDTaskConfig"), as.df=FALSE) {
+DiscoverSubgroups <- function(source, target, config=SDTaskConfig(), as.df=FALSE) {
   # Performs subgroup discovery according to target and config on data
   #
   # Args:

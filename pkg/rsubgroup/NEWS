@@ -3,6 +3,15 @@ rsubgroup NEWS
 For a detailed list of changes, see the svn commit history at
 svn://r-forge.r-project.org/svnroot/subgroup/
 
+Changes in version 0.6 (2014-10-dd)
+===================================
+* Improvements
+  * document setting Java heap space before loading the rsubgroup library.
+
+* Bug fixes:
+  * fix providing attributes=NULL (i.e., automatically include all attributes)
+  into subgroup discovery
+
 Changes in version 0.6 (2014-09-10)
 ===================================
 * Improvements:

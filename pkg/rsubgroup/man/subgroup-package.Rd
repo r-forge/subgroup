@@ -8,13 +8,21 @@ rsubgroup Package
 \description{
 The rsubgroup package contains a set of efficient and effective
  tools and algorithms for subgroup discovery and analytics.
+
+Note:
+rsubgroup uses rJava. To set the maximum available heap space for Java, the
+.jinit command of rJava needs to be called before loading rsubgroup, i.e.
+
+library(rJava)
+.jinit(parameters="-Xmx2048M") # for two gigabytes heap space, for example
+library(rsubgroup)
 }
 \details{
 \tabular{ll}{
 Package: \tab rsubgroup\cr
 Type: \tab Package\cr
-Version: \tab 0.6\cr
-Date: \tab 2014-09-10\cr
+Version: \tab 0.7\cr
+Date: \tab 2014-10-13\cr
 License: \tab GPL (>= 3)\cr
 LazyLoad: \tab yes\cr
 }
