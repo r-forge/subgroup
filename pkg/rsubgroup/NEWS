@@ -11,6 +11,10 @@ Changes in version 0.6 (2014-10-dd)
 * Bug fixes:
   * fix providing attributes=NULL (i.e., automatically include all attributes)
   into subgroup discovery
+  * fix max-attribute-value bug in SGSelectorGenerator, causing the inclusion
+  of two few selectors in subgroup discovery methods
+
+
 
 Changes in version 0.6 (2014-09-10)
 ===================================
