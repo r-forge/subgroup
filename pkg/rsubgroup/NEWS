@@ -3,7 +3,7 @@ rsubgroup NEWS
 For a detailed list of changes, see the svn commit history at
 svn://r-forge.r-project.org/svnroot/subgroup/
 
-Changes in version 0.7 (2015-04-xx)
+Changes in version 0.7 (2015-05-xx)
 ===================================
 * Improvements
   * document setting Java heap space before loading the rsubgroup library.

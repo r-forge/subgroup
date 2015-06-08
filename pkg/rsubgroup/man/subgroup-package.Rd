@@ -29,7 +29,7 @@ after loading the rJava package.
 Package: \tab rsubgroup\cr
 Type: \tab Package\cr
 Version: \tab 0.7\cr
-Date: \tab 2014-10-13\cr
+Date: \tab 2015-05-xx\cr
 License: \tab GPL (>= 3)\cr
 LazyLoad: \tab yes\cr
 }
