@@ -50,7 +50,7 @@ setMethod(".CreateARFFProvider", signature(source = "data.frame", name = "charac
 setMethod(".CreateARFFProvider", signature(source = "character", name = "character"),
     function(source, name, ...) {
       # Creates a dataset provider given a file name
-      provider <- .jnew("org/vikamine/kernel/xpdl/FileDatasetProvider", source)
+      provider <- .jnew("org/vikamine/kernel/xpdl/FileDatasetProvider", source, name)
       return(provider)
     }
 )
@@ -160,6 +160,30 @@ as.target <- function(attribute=NULL, value=NULL) {
   return(as.character(sgSelectorArray))
 }
 
+.ExtractSelectors <- function(sgDescription) {
+  # Internal function for converting a (Java) SGDescription consisting
+  # of a set of selection expressions into a list of those expressions
+  # where the 'key' is the attribute and the 'value' is the selector value
+  # Args:
+  #   sgDescription: A (Java) SGDescription object
+  #
+  # Returns:
+  #   A list of characters
+  result <- list()
+  sgSelectorList <- J(J(sgDescription, "getSelectors"), "toArray")
+  sgSelectorArray <- .jevalArray(
+      sgSelectorList,
+      simplify=TRUE)
+  for (selector in sgSelectorArray) {
+    attribute <- .jcall("org/vikamine/kernel/subgroup/search/SDSimpleTask", "Ljava/lang/String;", method = "getAttributeIDOfSelector", .jcast(selector, "org/vikamine/kernel/subgroup/selectors/SGSelector"))
+    value <- .jcall("org/vikamine/kernel/subgroup/search/SDSimpleTask", "Ljava/lang/String;", method="getSingleValueIDOfSelector", .jcast(selector, "org/vikamine/kernel/subgroup/selectors/SGSelector"))
+    tmp <- list()
+    tmp[[attribute]] <- value
+    result <- append(result, tmp)
+  }
+  return(result)
+}
+
 DiscoverSubgroupsByTask <- function(task, as.df = FALSE) {
   # Internal function for setting up and performing subgroup discovery
   # Args:
@@ -171,16 +195,17 @@ DiscoverSubgroupsByTask <- function(task, as.df = FALSE) {
   sgList <- J(sgSet, "toSortedList", FALSE)
   sgArray <- .jevalArray(J(sgList, "toArray"))
   
-  patterns = list()
+  patterns <- list()
   for (sg in sgArray) {
     #description <- as.character(J(J(sg, "getSGDescription"), "getDescription"))
     sgDescription <- J(sg, "getSGDescription")
     description <- .ConvertDescription(sgDescription)
+    selectors <- .ExtractSelectors(sgDescription)
     quality <- J(sg, "getQuality")
     size <- J(J(sg, "getStatistics"), "getSubgroupSize")
-    parameters = .GetParameters(task, sg)    
-    pattern <- new("Pattern", description=description, quality=quality, size=size, parameters=parameters)
-    patterns = append(patterns, pattern)
+    parameters <- .GetParameters(task, sg)    
+    pattern <- new("Pattern", description=description, quality=quality, size=size, parameters=parameters, selectors=selectors)
+    patterns <- append(patterns, pattern)
   }
   
   if (as.df) {
@@ -227,28 +252,28 @@ ToDataFrame <- function(patterns, ndigits=2) {
   #
   # Returns:
   #   The dataframe containing the pattern information
-  isNumeric = FALSE  
+  isNumeric <- FALSE  
   descriptions <- list()
-  length(descriptions) = length(patterns)
+  length(descriptions) <- length(patterns)
   qualities <-list()
-  length(qualities) = length(patterns)
+  length(qualities) <- length(patterns)
   sizes <- list()
   length(sizes) <- length(patterns)
   ps <- list()
   
-  i = 1
+  i <- 1
   for (pattern in patterns) {
-    descriptions[i] = paste(pattern@description, collapse=", ")
-    qualities[i] = .FormatDoubleSignificantDigits(pattern@quality, ndigits)
-    sizes[i] = pattern@size
+    descriptions[i] <- paste(pattern@description, collapse=", ")
+    qualities[i] <- .FormatDoubleSignificantDigits(pattern@quality, ndigits)
+    sizes[i] <- pattern@size
     if (!is.null(pattern@parameters$mean)) {
-      ps[i] = .FormatDoubleSignificantDigits(pattern@parameters$mean, ndigits)
-      isNumeric = TRUE
+      ps[i] <- .FormatDoubleSignificantDigits(pattern@parameters$mean, ndigits)
+      isNumeric <- TRUE
     } else {
-      ps[i] = .FormatDoubleSignificantDigits(pattern@parameters$p, ndigits)
-      isNumeric = FALSE
+      ps[i] <- .FormatDoubleSignificantDigits(pattern@parameters$p, ndigits)
+      isNumeric <- FALSE
     }
-    i = i + 1
+    i <- i + 1
   }
   if (isNumeric) {
     dataframe <- data.frame(
@@ -272,4 +297,16 @@ ToDataFrame <- function(patterns, ndigits=2) {
   gc(...)
   .jcall("java/lang/System", method = "gc")
   invisible()
+}
+
+is.matching <- function(pattern, data.list) {
+  selectors <- pattern@selectors
+  matching <- FALSE
+  for (sel in names(selectors)) {
+    if (data.list[[sel]] == selectors[[sel]]) {
+      matching <- TRUE
+      break
+    }
+  }
+  return(matching)
 }

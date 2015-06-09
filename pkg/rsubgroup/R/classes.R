@@ -54,6 +54,7 @@ SDTaskConfig <- function(...){
 setClass("Pattern",
     representation(
         description="character",
+        selectors="list",
         quality="numeric",
         size="numeric",
         parameters="list"
