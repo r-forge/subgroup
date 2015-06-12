@@ -301,10 +301,10 @@ ToDataFrame <- function(patterns, ndigits=2) {
 
 is.matching <- function(pattern, data.list) {
   selectors <- pattern@selectors
-  matching <- FALSE
+  matching <- TRUE
   for (sel in names(selectors)) {
-    if (data.list[[sel]] == selectors[[sel]]) {
-      matching <- TRUE
+    if (data.list[[sel]] != selectors[[sel]]) {
+      matching <- FALSE
       break
     }
   }
