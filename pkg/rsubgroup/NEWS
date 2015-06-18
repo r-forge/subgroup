@@ -9,9 +9,12 @@ Changes in version 0.7 (2015-06-xx)
   * document setting Java heap space before loading the rsubgroup library.
   * Improve error handling (exception signaling) when running subgroup discovery
   using an ARFF file directly.
+  * SDTaskConfig now provides an option mintp, that allows to set the minimal
+  true positives threshold to be contained in a subgroup, which is usually
+  very effective for pruning.
   * The Pattern class now contains a list of selection expressions (selectors)
-  for the subgroup, not only the description. Using the is.matching function,
-  a match of a pattern and a data instance can be checked now. 
+  for the subgroup, not only the description. Using the is.pattern.matching
+  function, a match of a pattern and a data instance can be checked now. 
 
 * Bug fixes:
   * fix providing attributes=NULL (i.e., automatically include all attributes)

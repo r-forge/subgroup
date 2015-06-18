@@ -1,12 +1,12 @@
-\name{is.matching}
-\alias{is.matching}
+\name{is.pattern.matching}
+\alias{is.pattern.matching}
 \title{Tests whether a pattern and a data list (row of a data frame) match}
 \description{
 Tests whether a pattern and a data list (row of a data frame) match, e.g.,
 for implementing classification methods.
 }
 \usage{
-is.matching(pattern, data.list)
+is.pattern.matching(pattern, data.list)
 }
 \arguments{
 \item{pattern}{An instance of class Pattern, e.g., returned by DiscoverSubgroups.}

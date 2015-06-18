@@ -95,6 +95,7 @@ CreateSDTask <- function(source, target, config = SDTaskConfig()) {
   J(task, "setMaxSGCount", as.integer(config@k))
   J(task, "setMinQualityLimit", as.double(config@minqual))
   J(task, "setMinSubgroupSize", as.double(config@minsize))
+  J(task, "setMinTPSupportAbsolute", as.double(config@mintp))
   J(task, "setMaxSGDSize", as.integer(config@maxlen))
   J(task, "setSuppressStrictlyIrrelevantSubgroups", config@relfilter)
   J(task, "setIgnoreDefaultValues", config@nodefaults)
@@ -299,11 +300,13 @@ ToDataFrame <- function(patterns, ndigits=2) {
   invisible()
 }
 
-is.matching <- function(pattern, data.list) {
+is.pattern.matching <- function(pattern, data.list) {
   selectors <- pattern@selectors
   matching <- TRUE
   for (sel in names(selectors)) {
-    if (data.list[[sel]] != selectors[[sel]]) {
+    data.list.selector <- as.character(data.list[[sel]])
+    pattern.selector <- as.character(selectors[[sel]])
+    if (isTRUE(data.list.selector != pattern.selector)) {
       matching <- FALSE
       break
     }
