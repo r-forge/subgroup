@@ -48,7 +48,7 @@
 	patterns are filtered during pattern mining; negatively
 	impacts performance (default \code{relfilter = FALSE})).}
 	\item{\code{postfilter}:}{Controls, whether a post-processing
-	filter is applied; one of:
+	filter is applied; one (or a vector) of:
 	Minimum Improvement (Global) \code{min-improve-global},
 	checks the patterns against all possible generalizations,
 	Minimum Improvement (Pattern Set) \code{min-improve-set},
@@ -61,7 +61,10 @@
 	(0.05 level) w.r.t. all their possible generalizations,
 	Significant Improvement (Set) \code{sig-improve-set},
 	removes patterns that do not significantly improve
-	(0.05 level) w.r.t. all generalizations in the result set.
+	(0.05 level) w.r.t. all generalizations in the result set,
+	Weighted Covering \code{weighted-covering}, performs weighted
+	covering on the data in order to select a covering set of
+	subgroups while reducing the overlap on the data. 
 	By default no postfilter is set, i.e., \code{postfilter = ""}.
 	}
 	\item{\code{attributes}:}{The list of attributes to consider for mining.

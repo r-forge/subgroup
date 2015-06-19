@@ -14,7 +14,10 @@ Changes in version 0.7 (2015-06-xx)
   very effective for pruning.
   * The Pattern class now contains a list of selection expressions (selectors)
   for the subgroup, not only the description. Using the is.pattern.matching
-  function, a match of a pattern and a data instance can be checked now. 
+  function, a match of a pattern and a data instance can be checked now.
+  * In SDTaskConfig, postfilter can be a single filter or a vector of filters,
+  that are then applied in order on the results. This allows e.g., the combination
+  of minimal improvement filtering with weighted covering post-processing. 
 
 * Bug fixes:
   * fix providing attributes=NULL (i.e., automatically include all attributes)

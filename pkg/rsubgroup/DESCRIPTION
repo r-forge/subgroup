@@ -2,7 +2,7 @@ Package: rsubgroup
 Type: Package
 Title: Subgroup Discovery and Analytics
 Version: 0.7
-Date: 2015-06-18
+Date: 2015-06-19
 Author: Martin Atzmueller
 Maintainer: Martin Atzmueller <martin@atzmueller.net>
 Description: A collection of efficient and effective tools and

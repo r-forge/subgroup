@@ -99,8 +99,10 @@ CreateSDTask <- function(source, target, config = SDTaskConfig()) {
   J(task, "setMaxSGDSize", as.integer(config@maxlen))
   J(task, "setSuppressStrictlyIrrelevantSubgroups", config@relfilter)
   J(task, "setIgnoreDefaultValues", config@nodefaults)
-  if (config@postfilter != "") {
-    J(task, "setPostFilter", config@postfilter)
+  if ((length(config@postfilter) > 1) || (nchar(config@postfilter) > 0)) {
+    for (filter in config@postfilter) {
+      J(task, "setPostFilter", filter)
+    }
   }
   if (is.null(config@attributes)) {
     attributesArrayObject <- .GetAllAttributesAsJArray(ontology = ontology)

@@ -29,6 +29,7 @@
 }
 
 setClassUnion(".vectorOrNull", members=c("vector", "NULL"))
+setClassUnion(".vectorOrCharacter", members=c("vector", "character"))
 
 setClass("SDTaskConfig",
     representation(
@@ -41,7 +42,7 @@ setClass("SDTaskConfig",
         maxlen      = "numeric",
         nodefaults  = "logical",
         relfilter   = "logical",
-        postfilter  = "character",
+        postfilter  = ".vectorOrCharacter",
         attributes  = ".vectorOrNull"
     ),
     prototype(qf="ps", method="sdmap", k = as.integer(20),
