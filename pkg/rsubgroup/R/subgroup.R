@@ -138,7 +138,8 @@ as.target <- function(attribute=NULL, value=NULL) {
     size <- J(J(sg, "getStatistics"), "getSubgroupSize")
     p <- J(J(sg, "getStatistics"), "getP")
     p0 <- J(J(sg, "getStatistics"), "getP0")
-    return(list(p = p, p0 = p0, size = size))
+    chi2 <- J("org.vikamine.kernel.subgroup.SGUtils")$calculateChi2OfSubgroup(J(sg, "getStatistics"))
+    return(list(p = p, p0 = p0, chi2=chi2, size = size))
   } else if (J(target, "isNumeric")) {
     size <- J(J(sg, "getStatistics"), "getSubgroupSize")
     mean <- J(J(sg, "getStatistics"), "getSGMean")
@@ -263,6 +264,9 @@ ToDataFrame <- function(patterns, ndigits=2) {
   sizes <- list()
   length(sizes) <- length(patterns)
   ps <- list()
+  length(ps) <- length(patterns)
+  chi2 <- list()
+  length(chi2) <- length(patterns)
   
   i <- 1
   for (pattern in patterns) {
@@ -274,6 +278,7 @@ ToDataFrame <- function(patterns, ndigits=2) {
       isNumeric <- TRUE
     } else {
       ps[i] <- .FormatDoubleSignificantDigits(pattern@parameters$p, ndigits)
+      chi2[i] <- .FormatDoubleSignificantDigits(pattern@parameters$chi2, ndigits)
       isNumeric <- FALSE
     }
     i <- i + 1
@@ -289,6 +294,7 @@ ToDataFrame <- function(patterns, ndigits=2) {
         quality=as.vector(qualities, "numeric"),
         p=as.vector(ps, "numeric"), 
         size=as.vector(sizes, "numeric"),
+        chi2=as.vector(chi2, "numeric"),
         description=as.vector(descriptions, "character"))
   }
   return(dataframe)

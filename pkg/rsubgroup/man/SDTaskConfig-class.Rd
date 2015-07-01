@@ -15,11 +15,12 @@
 \section{Slots}{
   \describe{
     \item{\code{qf}:}{A quality function; one of:
-	Binomial-Test \code{bin},
-	Chi-Square-Test \code{chi2},
+    Adjusted Residuals \code{ares},
+	Binomial Test \code{bin},
+	Chi-Square Test \code{chi2},
+	Gain \code{gain},
 	Lift \code{lift},
 	Piatetsky-Shapiro \code{ps},
-	Gain \code{gain},
 	Relative Gain \code{relgain},
 	Weighted Relative Accuracy \code{wracc}.
 	The default is \code{qf = "ps"}.
