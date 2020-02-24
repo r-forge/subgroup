@@ -2,7 +2,7 @@
 #    rsubgroup package R classes
 # 
 #    This file is part of the rsubgroup package.
-#    Copyright (C) 2011-2015 by Martin Atzmueller
+#    Copyright (C) 2011-2019 by Martin Atzmueller
 #    
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -43,12 +43,13 @@ setClass("SDTaskConfig",
         nodefaults  = "logical",
         relfilter   = "logical",
         postfilter  = ".vectorOrCharacter",
-        attributes  = ".vectorOrNull"
+        attributes  = ".vectorOrNull",
+        parfilter  = "numeric"
     ),
     prototype(qf="ps", method="sdmap", k = as.integer(20),
         minqual = as.integer(0), minsize = as.integer(0), mintp = as.integer(0),
         maxlen = as.integer(7), nodefaults = FALSE, relfilter = FALSE,
-        postfilter = "", attributes = NULL)
+        postfilter = "", parfilter = 0.05, attributes = NULL)
 )
 
 SDTaskConfig <- function(...){

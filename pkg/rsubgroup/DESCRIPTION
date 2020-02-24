@@ -1,8 +1,8 @@
 Package: rsubgroup
 Type: Package
 Title: Subgroup Discovery and Analytics
-Version: 0.7
-Date: 2015-07-01
+Version: 0.8
+Date: 2019-05-23
 Author: Martin Atzmueller
 Maintainer: Martin Atzmueller <martin@atzmueller.net>
 Description: A collection of efficient and effective tools and
@@ -13,6 +13,6 @@ Description: A collection of efficient and effective tools and
 Classification/ACM: G.4, H.2.8, I.5.1
 License: GPL (>= 3)
 Depends: R (>= 2.6.0), methods, rJava (>= 0.6-3), foreign (>= 0.8-40)
-SystemRequirements: Java (>= 6.0)
+SystemRequirements: Java (>= 8)
 Collate: 'AAAonLoad.R' 'randomSeed.R' 'classes.R' 'subgroup.R'
 URL: http://www.rsubgroup.org

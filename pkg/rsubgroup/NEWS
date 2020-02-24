@@ -3,7 +3,19 @@ rsubgroup NEWS
 For a detailed list of changes, see the svn commit history at
 svn://r-forge.r-project.org/svnroot/subgroup/
 
-Changes in version 0.7 (2015-07-xx)
+Changes in version 0.8 (2019-05-23)
+===================================
+* Improvements
+  * included new SDTaskConfig#parfilter: Provides the minimal improvement
+    value for the postfilter (for min-improve-* filters), or the significance
+    level (P) for sig-improve-* filters.
+  * updated org.vikamine.kernel version
+  * package-internal: fixed Java requirements (string) in DESCRIPTION
+
+* Bug fixes.
+  * fixed bug in automatic discretization used in rsubgroup VIKAMINE kernel
+
+Changes in version 0.7 (2015-07-01)
 ===================================
 * Improvements
   * document setting Java heap space before loading the rsubgroup library.

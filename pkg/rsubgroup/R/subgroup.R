@@ -2,7 +2,7 @@
 #    rsubgroup package R classes
 # 
 #    This file is part of the rsubgroup package.
-#    Copyright (C) 2011-2015 by Martin Atzmueller
+#    Copyright (C) 2011-2019 by Martin Atzmueller
 #    
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -103,6 +103,9 @@ CreateSDTask <- function(source, target, config = SDTaskConfig()) {
     for (filter in config@postfilter) {
       J(task, "setPostFilter", filter)
     }
+  }
+  if (!is.na(config@parfilter)) {
+    J(task, "setPostFilterParameter", config@parfilter)
   }
   if (is.null(config@attributes)) {
     attributesArrayObject <- .GetAllAttributesAsJArray(ontology = ontology)

@@ -1,5 +1,5 @@
 <?php
 header("HTTP/1.1 301 Moved Permanently");
-header("Location:http://www.subgroup.cc");
+header("Location:http://www.rsubgroup.org");
 exit;
 ?>

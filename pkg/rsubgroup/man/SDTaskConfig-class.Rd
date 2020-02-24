@@ -14,6 +14,16 @@
 
 \section{Slots}{
   \describe{
+    \item{\code{attributes}:}{The list of attributes to consider for mining.
+    Either a vector of attribute names, or NULL (the default),
+    which includes all attributes.} 
+    \item{\code{method}:}{A mining method; one of
+    Beam-Search \code{beam},
+    BSD \code{bsd},
+    SD-Map \code{sdmap},
+    SD-Map enabling internal disjunctions \code{sdmap-dis}.
+    The default is \code{method = "sdmap"}.
+    }
     \item{\code{qf}:}{A quality function; one of:
     Adjusted Residuals \code{ares},
 	Binomial Test \code{bin},
@@ -24,14 +34,7 @@
 	Relative Gain \code{relgain},
 	Weighted Relative Accuracy \code{wracc}.
 	The default is \code{qf = "ps"}.
-	}
-    \item{\code{method}:}{A mining method; one of
-	Beam-Search \code{beam},
-	BSD \code{bsd},
-	SD-Map \code{sdmap},
-	SD-Map enabling internal disjunctions \code{sdmap-dis}.
-	The default is \code{method = "sdmap"}.
-	}
+	}    
     \item{\code{k}:}{The maximum number (top-k) of patterns
 	to discover. The default is \code{k = 20}}
 	\item{\code{minqual}:}{The minimal quality (default \code{minqual = 0}).}
@@ -59,19 +62,20 @@
 	are strictly irrelevant,
 	Significant Improvement (Global) \code{sig-improve-global},
 	removes patterns that do not significantly improve
-	(0.05 level) w.r.t. all their possible generalizations,
+	(default 0.01 level) w.r.t. all their possible generalizations,
 	Significant Improvement (Set) \code{sig-improve-set},
 	removes patterns that do not significantly improve
-	(0.05 level) w.r.t. all generalizations in the result set,
+	(default 0.01 level) w.r.t. all generalizations in the result set,
 	Weighted Covering \code{weighted-covering}, performs weighted
 	covering on the data in order to select a covering set of
 	subgroups while reducing the overlap on the data. 
 	By default no postfilter is set, i.e., \code{postfilter = ""}.
 	}
-	\item{\code{attributes}:}{The list of attributes to consider for mining.
-	Either a vector of attribute names, or NULL (the default),
-	which includes all attributes.}
+	\item{\code{parfilter}:}{Provides the minimal improvement value for the
+	postfilter (for min-improve-* filters), or the significance level (P) for
+	sig-improve-* filters.
 	}
+  }
  }
 \seealso{
 \code{\link{DiscoverSubgroups}}.
