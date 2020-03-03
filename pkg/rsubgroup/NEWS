@@ -7,8 +7,8 @@ Changes in version 0.8 (2019-05-23)
 ===================================
 * Improvements
   * included new SDTaskConfig#parfilter: Provides the minimal improvement
-    value for the postfilter (for min-improve-* filters), or the significance
-    level (P) for sig-improve-* filters.
+    value for the postfilter (for min-improve-* filters), or the applied
+    significance level (P) for sig-improve-* filters.
   * updated org.vikamine.kernel version
   * package-internal: fixed Java requirements (string) in DESCRIPTION
 
