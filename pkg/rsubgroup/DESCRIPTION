@@ -8,7 +8,7 @@ Maintainer: Martin Atzmueller <martin@atzmueller.net>
 Description: A collection of efficient and effective tools and
 	algorithms for subgroup discovery and analytics. The package
 	integrates an R interface to the org.vikamine.kernel library
-	of the VIKAMINE system (http://www.vikamine.org) implementing
+	of the VIKAMINE system <http://www.vikamine.org> implementing
 	subgroup discovery, pattern mining and analytics in Java.
 Classification/ACM: G.4, H.2.8, I.5.1
 License: GPL (>= 3)
